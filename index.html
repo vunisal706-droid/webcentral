@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#4F46E5">
     <meta name="description" content="Portal educativo con herramientas de lengua y matemáticas">
     
-    <title>Portal Educativo</title>
+    <title>CEIP Capitulaciones</title>
     
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
@@ -256,24 +256,32 @@
 <body>
     <div class="container">
         <header>
-            <h1>📚 Portal Educativo</h1>
-            <p>Herramientas interactivas de aprendizaje</p>
+            <h1>📚 CEIP Capitulaciones</h1>
+            <p>Portal Educativo Interactivo</p>
         </header>
 
         <div class="grid">
             <!-- LecturApp -->
-            <a href="https://claude.ai/public/artifacts/TU-ENLACE-LECTURAPP-AQUI" class="card external-link">
+            <a href="https://claude.ai/public/artifacts/31ceb2ea-90fe-411c-86e2-a86779e4466d" 
+               class="card external-link" 
+               data-app="lecturapp"
+               target="_blank"
+               rel="noopener noreferrer">
                 <div class="card-icon">📖</div>
                 <h2>LecturApp</h2>
-                <p>Generador de textos de lectura con comprensión lectora adaptada a primaria</p>
+                <p>Lee, imagina y aprende a tu ritmo. Herramienta interactiva para desarrollar habilidades de lectura comprensiva.</p>
                 <span class="badge">Lengua</span>
             </a>
 
             <!-- Matemáticas -->
-            <a href="https://claude.ai/public/artifacts/TU-ENLACE-MATEMATICAS-AQUI" class="card external-link">
+            <a href="https://claude.ai/public/artifacts/TU-ENLACE-MATEMATICAS" 
+               class="card external-link" 
+               data-app="matematicas"
+               target="_blank"
+               rel="noopener noreferrer">
                 <div class="card-icon">🔢</div>
                 <h2>Matemáticas</h2>
-                <p>Ejercicios interactivos de matemáticas para practicar operaciones</p>
+                <p>Ejercicios interactivos de matemáticas para practicar operaciones y resolver problemas.</p>
                 <span class="badge">Matemáticas</span>
             </a>
         </div>
@@ -298,7 +306,7 @@
         </div>
 
         <footer>
-            <p>Versión 2.0 - Portal Educativo | Enlaces externos optimizados</p>
+            <p>Versión 3.0 - Portal Educativo | 2025</p>
         </footer>
     </div>
 
@@ -310,11 +318,16 @@
 
     <!-- 🔧 SCRIPT MEJORADO PARA ENLACES EN PWA -->
     <script>
+        console.log('🚀 Iniciando app...');
+        console.log('📱 User Agent:', navigator.userAgent);
+        
         // Detectar si la app está corriendo como PWA instalada
         function isPWA() {
-            const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-            const isIOSStandalone = window.navigator.standalone === true;
-            return isStandalone || isIOSStandalone;
+            const standalone = window.matchMedia('(display-mode: standalone)').matches;
+            const ios = window.navigator.standalone === true;
+            const result = standalone || ios;
+            console.log('🔍 ¿Es PWA?', result, { standalone, ios });
+            return result;
         }
 
         // Mostrar indicador si está instalada como PWA
@@ -322,6 +335,7 @@
             const indicator = document.getElementById('pwaIndicator');
             if (isPWA() && indicator) {
                 indicator.classList.add('active');
+                console.log('✅ Indicador PWA mostrado');
             }
         }
 
@@ -329,110 +343,122 @@
         function setupExternalLinks() {
             const isInstalledPWA = isPWA();
             
-            console.log('🔍 Estado de la app:', {
+            console.log('🔗 Configurando enlaces...');
+            console.log('📊 Estado:', {
                 isPWA: isInstalledPWA,
-                userAgent: navigator.userAgent,
-                displayMode: window.matchMedia('(display-mode: standalone)').matches
+                platform: navigator.platform,
+                userAgent: navigator.userAgent.substring(0, 50) + '...'
             });
             
-            // Obtener todos los enlaces con clase external-link
-            const links = document.querySelectorAll('a.external-link');
+            // Obtener TODOS los enlaces
+            const links = document.querySelectorAll('a[href]');
+            
+            console.log(`📝 Total de enlaces encontrados: ${links.length}`);
             
             links.forEach((link, index) => {
                 const href = link.getAttribute('href');
                 
-                if (!href || !href.startsWith('http')) {
-                    console.warn('⚠️ Enlace no válido:', href);
+                // Verificar si es un enlace externo
+                if (!href || (!href.startsWith('http://') && !href.startsWith('https://'))) {
+                    console.log(`⚠️ Enlace ${index + 1} ignorado (no es http/https):`, href);
                     return;
                 }
                 
-                console.log(`🔗 Configurando enlace ${index + 1}:`, href);
+                console.log(`🔗 Configurando enlace ${index + 1}:`, {
+                    href: href,
+                    hasClass: link.classList.contains('external-link'),
+                    dataApp: link.getAttribute('data-app')
+                });
                 
-                // SIEMPRE añadir estos atributos
-                link.setAttribute('target', '_blank');
-                link.setAttribute('rel', 'noopener noreferrer');
+                // CRÍTICO: Asegurar atributos
+                if (!link.hasAttribute('target')) {
+                    link.setAttribute('target', '_blank');
+                    console.log(`  ✏️ Añadido target="_blank"`);
+                }
+                if (!link.hasAttribute('rel')) {
+                    link.setAttribute('rel', 'noopener noreferrer');
+                    console.log(`  ✏️ Añadido rel="noopener noreferrer"`);
+                }
                 
-                // Manejador de clic mejorado
+                // Manejador de clic MEJORADO
                 link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
+                    console.log('👆 CLIC DETECTADO en:', href);
+                    console.log('📱 Es PWA instalada:', isInstalledPWA);
                     
-                    console.log('👆 Clic detectado en:', href);
-                    console.log('📱 Es PWA:', isInstalledPWA);
-                    
-                    // SOLUCIÓN UNIVERSAL que funciona en PWA y navegador
-                    try {
-                        // Método más confiable: crear un elemento <a> temporal
-                        const tempLink = document.createElement('a');
-                        tempLink.href = href;
-                        tempLink.target = '_system'; // Fuerza navegador del sistema
-                        tempLink.rel = 'noopener noreferrer';
+                    // IMPORTANTE: Solo interceptar si es PWA
+                    if (isInstalledPWA) {
+                        e.preventDefault();
+                        e.stopPropagation();
                         
-                        // Para iOS en PWA
-                        if (navigator.userAgent.match(/iPhone|iPad|iPod/)) {
-                            tempLink.target = '_blank';
-                        }
+                        console.log('🔧 Interceptando clic (PWA mode)...');
                         
-                        document.body.appendChild(tempLink);
-                        
-                        // Simular clic real
-                        const clickEvent = new MouseEvent('click', {
-                            view: window,
-                            bubbles: true,
-                            cancelable: true
-                        });
-                        
-                        tempLink.dispatchEvent(clickEvent);
-                        
-                        // Limpiar
-                        setTimeout(() => {
-                            document.body.removeChild(tempLink);
-                        }, 100);
-                        
-                        console.log('✅ Enlace procesado correctamente');
-                        
-                    } catch (error) {
-                        console.error('❌ Error al procesar enlace:', error);
-                        
-                        // Fallback: intentar window.open
                         try {
-                            window.open(href, '_blank', 'noopener,noreferrer');
-                            console.log('✅ Fallback: window.open ejecutado');
-                        } catch (e2) {
-                            console.error('❌ Fallback también falló:', e2);
-                            // Último recurso: redirigir directamente
-                            alert('Abriendo en el navegador...');
+                            // MÉTODO 1: window.open directo
+                            console.log('🔄 Intentando window.open...');
+                            const win = window.open(href, '_blank', 'noopener,noreferrer');
+                            
+                            if (win) {
+                                console.log('✅ window.open exitoso');
+                            } else {
+                                console.log('⚠️ window.open bloqueado, intentando alternativa...');
+                                
+                                // MÉTODO 2: Crear elemento <a> temporal
+                                const tempLink = document.createElement('a');
+                                tempLink.href = href;
+                                tempLink.target = '_blank';
+                                tempLink.rel = 'noopener noreferrer';
+                                
+                                document.body.appendChild(tempLink);
+                                console.log('🔄 Simulando clic en enlace temporal...');
+                                tempLink.click();
+                                document.body.removeChild(tempLink);
+                                console.log('✅ Método alternativo ejecutado');
+                            }
+                        } catch (error) {
+                            console.error('❌ Error al abrir enlace:', error);
+                            
+                            // MÉTODO 3: Última alternativa - location
+                            console.log('🔄 Intentando última alternativa (location.href)...');
                             window.location.href = href;
                         }
+                    } else {
+                        // En navegador normal, dejar que funcione naturalmente
+                        console.log('✅ Navegador normal - comportamiento por defecto');
                     }
-                }, true); // true = fase de captura, se ejecuta antes
+                }, true); // true = fase de captura
             });
             
-            console.log(`✅ Sistema de enlaces activado (${links.length} enlaces configurados)`);
+            console.log(`✅ Sistema de enlaces activado (${links.length} enlaces procesados)`);
         }
 
         // Inicialización
         function init() {
+            console.log('🎬 Ejecutando init()...');
             setupExternalLinks();
             showPWAIndicator();
             
-            // Log para debugging
-            console.log('📱 Info del dispositivo:', {
+            console.log('📊 Información completa del dispositivo:', {
                 platform: navigator.platform,
                 userAgent: navigator.userAgent,
                 standalone: navigator.standalone,
-                displayMode: window.matchMedia('(display-mode: standalone)').matches
+                displayMode: window.matchMedia('(display-mode: standalone)').matches,
+                language: navigator.language,
+                online: navigator.onLine
             });
+            
+            console.log('✅ Inicialización completa');
         }
 
         // Ejecutar cuando el DOM esté listo
         if (document.readyState === 'loading') {
+            console.log('⏳ Esperando DOMContentLoaded...');
             document.addEventListener('DOMContentLoaded', init);
         } else {
+            console.log('✅ DOM ya listo, ejecutando init...');
             init();
         }
 
-        // También ejecutar cuando la página se muestre (navegación back/forward)
+        // También ejecutar cuando la página se muestre
         window.addEventListener('pageshow', function(event) {
             if (event.persisted) {
                 console.log('🔄 Página restaurada desde caché');
@@ -440,9 +466,14 @@
             }
         });
 
-        // Log cuando la app está lista
+        // Log cuando la app está completamente cargada
         window.addEventListener('load', function() {
             console.log('✅ App completamente cargada y lista');
+        });
+
+        // Capturar errores globales
+        window.addEventListener('error', function(e) {
+            console.error('❌ Error global:', e.message);
         });
     </script>
 
