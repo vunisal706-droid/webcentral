@@ -2,13 +2,17 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#4F46E5">
-    <meta name="description" content="Herramientas educativas del CEIP Capitulaciones">
-    <title>CEIP Capitulaciones - Herramientas Educativas</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="description" content="Portal educativo con herramientas de lengua y matemáticas">
+    
+    <title>Portal Educativo</title>
+    
+    <!-- PWA -->
     <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon-192.png">
     <link rel="apple-touch-icon" href="icon-192.png">
+    
     <style>
         * {
             margin: 0;
@@ -17,153 +21,179 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             padding: 20px;
-            color: #333;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 800px;
-            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         header {
             text-align: center;
-            margin-bottom: 50px;
-            animation: fadeInDown 0.8s ease-out;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.6s ease-out;
         }
 
-        h1 {
-            color: white;
+        header h1 {
             font-size: 2.5rem;
-            font-weight: 700;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
-        .subtitle {
-            color: rgba(255,255,255,0.9);
+        header p {
             font-size: 1.1rem;
-            font-weight: 300;
+            opacity: 0.9;
         }
 
-        .cards-container {
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
+            gap: 25px;
+            margin-bottom: 30px;
         }
 
         .card {
             background: white;
             border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
             text-decoration: none;
             color: inherit;
             display: block;
+            animation: fadeInUp 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
         }
 
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
 
         .card:active {
             transform: translateY(-5px);
         }
 
-        .icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover .icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .icon-lectura {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .icon-problemas {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
         }
 
         .card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
             color: #333;
         }
 
         .card p {
             color: #666;
             line-height: 1.6;
-            font-size: 0.95rem;
+            margin-bottom: 15px;
         }
 
-        .install-prompt {
+        .card .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .info-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Indicador de PWA instalada */
+        .pwa-indicator {
             position: fixed;
             bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            display: none;
-            align-items: center;
-            gap: 15px;
-            animation: slideUp 0.5s ease-out;
-        }
-
-        .install-prompt.show {
-            display: flex;
-        }
-
-        .install-btn {
-            background: #4F46E5;
-            color: white;
-            border: none;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
             padding: 10px 20px;
             border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-size: 0.85rem;
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+            z-index: 1000;
         }
 
-        .install-btn:hover {
-            background: #4338CA;
+        .pwa-indicator.active {
+            display: block;
         }
 
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #666;
-            padding: 0 5px;
+        .pwa-indicator .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
         }
 
+        /* Animaciones */
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
@@ -174,7 +204,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -182,32 +212,43 @@
             }
         }
 
-        @keyframes slideUp {
+        @keyframes fadeIn {
             from {
-                transform: translateX(-50%) translateY(100px);
                 opacity: 0;
             }
             to {
-                transform: translateX(-50%) translateY(0);
                 opacity: 1;
             }
         }
 
-        @media (max-width: 600px) {
-            h1 {
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
                 font-size: 2rem;
             }
-            
-            .cards-container {
+
+            .grid {
                 grid-template-columns: 1fr;
             }
 
-            .install-prompt {
-                left: 20px;
-                right: 20px;
-                transform: none;
-                flex-direction: column;
-                text-align: center;
+            .card {
+                padding: 20px;
+            }
+
+            .pwa-indicator {
+                bottom: 10px;
+                right: 10px;
+                font-size: 0.75rem;
+                padding: 8px 15px;
             }
         }
     </style>
@@ -215,87 +256,209 @@
 <body>
     <div class="container">
         <header>
-            <h1>CEIP Capitulaciones</h1>
-            <p class="subtitle">Santa Fe</p>
+            <h1>📚 Portal Educativo</h1>
+            <p>Herramientas interactivas de aprendizaje</p>
         </header>
 
-        <div class="cards-container">
-            <a href="https://claude.ai/public/artifacts/31ceb2ea-90fe-411c-86e2-a86779e4466d" class="card">
-                <div class="icon icon-lectura">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                    </svg>
-                </div>
+        <div class="grid">
+            <!-- LecturApp -->
+            <a href="https://claude.ai/public/artifacts/TU-ENLACE-LECTURAPP-AQUI" class="card external-link">
+                <div class="card-icon">📖</div>
                 <h2>LecturApp</h2>
-                <p>Lee, imagina y aprende a tu ritmo. Herramienta interactiva para desarrollar habilidades de lectura comprensiva.</p>
+                <p>Generador de textos de lectura con comprensión lectora adaptada a primaria</p>
+                <span class="badge">Lengua</span>
             </a>
 
-            <a href="https://claude.ai/public/artifacts/48198416-ad30-4255-ad41-0662aed984eb" class="card">
-                <div class="icon icon-problemas">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                    </svg>
-                </div>
-                <h2>Resolución de Problemas</h2>
-                <p>Plan estructurado para desarrollar el pensamiento matemático y la resolución de problemas en primaria.</p>
+            <!-- Matemáticas -->
+            <a href="https://claude.ai/public/artifacts/TU-ENLACE-MATEMATICAS-AQUI" class="card external-link">
+                <div class="card-icon">🔢</div>
+                <h2>Matemáticas</h2>
+                <p>Ejercicios interactivos de matemáticas para practicar operaciones</p>
+                <span class="badge">Matemáticas</span>
             </a>
         </div>
+
+        <div class="info-box">
+            <h3>💡 Características</h3>
+            <ul>
+                <li>Interfaz adaptada para tablets y móviles</li>
+                <li>Funciona sin conexión una vez instalada</li>
+                <li>Vocabulario inteligente con 46 categorías</li>
+                <li>Seguimiento de progreso del estudiante</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h3>📱 ¿Cómo instalar la app?</h3>
+            <ul>
+                <li><strong>Android:</strong> Chrome → Menú (⋮) → "Instalar aplicación"</li>
+                <li><strong>iOS:</strong> Safari → Compartir → "Añadir a pantalla de inicio"</li>
+                <li><strong>PC:</strong> Chrome → Icono de instalación en la barra</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>Versión 2.0 - Portal Educativo | Enlaces externos optimizados</p>
+        </footer>
     </div>
 
-    <div class="install-prompt" id="installPrompt">
-        <span>📱 Instala la app para acceso rápido</span>
-        <button class="install-btn" id="installBtn">Instalar</button>
-        <button class="close-btn" id="closeBtn">&times;</button>
+    <!-- Indicador de PWA instalada -->
+    <div class="pwa-indicator" id="pwaIndicator">
+        <span class="dot"></span>
+        <span>App instalada</span>
     </div>
 
+    <!-- 🔧 SCRIPT MEJORADO PARA ENLACES EN PWA -->
     <script>
-        // Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js')
-                    .then(reg => console.log('Service Worker registrado'))
-                    .catch(err => console.log('Error al registrar Service Worker:', err));
+        // Detectar si la app está corriendo como PWA instalada
+        function isPWA() {
+            const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+            const isIOSStandalone = window.navigator.standalone === true;
+            return isStandalone || isIOSStandalone;
+        }
+
+        // Mostrar indicador si está instalada como PWA
+        function showPWAIndicator() {
+            const indicator = document.getElementById('pwaIndicator');
+            if (isPWA() && indicator) {
+                indicator.classList.add('active');
+            }
+        }
+
+        // Función MEJORADA para abrir enlaces externos
+        function setupExternalLinks() {
+            const isInstalledPWA = isPWA();
+            
+            console.log('🔍 Estado de la app:', {
+                isPWA: isInstalledPWA,
+                userAgent: navigator.userAgent,
+                displayMode: window.matchMedia('(display-mode: standalone)').matches
+            });
+            
+            // Obtener todos los enlaces con clase external-link
+            const links = document.querySelectorAll('a.external-link');
+            
+            links.forEach((link, index) => {
+                const href = link.getAttribute('href');
+                
+                if (!href || !href.startsWith('http')) {
+                    console.warn('⚠️ Enlace no válido:', href);
+                    return;
+                }
+                
+                console.log(`🔗 Configurando enlace ${index + 1}:`, href);
+                
+                // SIEMPRE añadir estos atributos
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+                
+                // Manejador de clic mejorado
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    console.log('👆 Clic detectado en:', href);
+                    console.log('📱 Es PWA:', isInstalledPWA);
+                    
+                    // SOLUCIÓN UNIVERSAL que funciona en PWA y navegador
+                    try {
+                        // Método más confiable: crear un elemento <a> temporal
+                        const tempLink = document.createElement('a');
+                        tempLink.href = href;
+                        tempLink.target = '_system'; // Fuerza navegador del sistema
+                        tempLink.rel = 'noopener noreferrer';
+                        
+                        // Para iOS en PWA
+                        if (navigator.userAgent.match(/iPhone|iPad|iPod/)) {
+                            tempLink.target = '_blank';
+                        }
+                        
+                        document.body.appendChild(tempLink);
+                        
+                        // Simular clic real
+                        const clickEvent = new MouseEvent('click', {
+                            view: window,
+                            bubbles: true,
+                            cancelable: true
+                        });
+                        
+                        tempLink.dispatchEvent(clickEvent);
+                        
+                        // Limpiar
+                        setTimeout(() => {
+                            document.body.removeChild(tempLink);
+                        }, 100);
+                        
+                        console.log('✅ Enlace procesado correctamente');
+                        
+                    } catch (error) {
+                        console.error('❌ Error al procesar enlace:', error);
+                        
+                        // Fallback: intentar window.open
+                        try {
+                            window.open(href, '_blank', 'noopener,noreferrer');
+                            console.log('✅ Fallback: window.open ejecutado');
+                        } catch (e2) {
+                            console.error('❌ Fallback también falló:', e2);
+                            // Último recurso: redirigir directamente
+                            alert('Abriendo en el navegador...');
+                            window.location.href = href;
+                        }
+                    }
+                }, true); // true = fase de captura, se ejecuta antes
+            });
+            
+            console.log(`✅ Sistema de enlaces activado (${links.length} enlaces configurados)`);
+        }
+
+        // Inicialización
+        function init() {
+            setupExternalLinks();
+            showPWAIndicator();
+            
+            // Log para debugging
+            console.log('📱 Info del dispositivo:', {
+                platform: navigator.platform,
+                userAgent: navigator.userAgent,
+                standalone: navigator.standalone,
+                displayMode: window.matchMedia('(display-mode: standalone)').matches
             });
         }
 
-        // PWA Install Prompt
-        let deferredPrompt;
-        const installPrompt = document.getElementById('installPrompt');
-        const installBtn = document.getElementById('installBtn');
-        const closeBtn = document.getElementById('closeBtn');
+        // Ejecutar cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
 
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installPrompt.classList.add('show');
-        });
-
-        installBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                console.log(`User response: ${outcome}`);
-                deferredPrompt = null;
-                installPrompt.classList.remove('show');
+        // También ejecutar cuando la página se muestre (navegación back/forward)
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                console.log('🔄 Página restaurada desde caché');
+                setupExternalLinks();
             }
         });
 
-        closeBtn.addEventListener('click', () => {
-            installPrompt.classList.remove('show');
+        // Log cuando la app está lista
+        window.addEventListener('load', function() {
+            console.log('✅ App completamente cargada y lista');
         });
+    </script>
 
-        // Añadir animación de clic visual
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', function(e) {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 100);
+    <!-- Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker registrado:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('❌ Error registrando Service Worker:', error);
+                    });
             });
-        });
+        }
     </script>
 </body>
 </html>
