@@ -144,6 +144,12 @@
             background: linear-gradient(135deg, #f9d423 0%, #ff4e50 100%);
         }
 
+        /* Nuevo estilo Egipto */
+        .icon-egipto {
+            background: linear-gradient(135deg, #d4af37 0%, #f7e98e 100%);
+            border: 2px solid #b8860b;
+        }
+
         .app-card h2 {
             color: #1e293b;
             font-size: 1.6em;
@@ -177,115 +183,38 @@
             font-size: 0.95em;
         }
 
-        /* Responsive para pizarras digitales - vista horizontal */
         @media (min-width: 1200px) and (orientation: landscape) {
-            body {
-                padding: 40px;
-            }
-
-            header {
-                padding: 50px;
-            }
-
-            .logo-emoji {
-                width: 120px;
-                height: 120px;
-                font-size: 4.5em;
-            }
-
-            .header-text h1 {
-                font-size: 3.5em;
-            }
-
-            .header-text p {
-                font-size: 1.5em;
-            }
-
-            .apps-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 40px;
-            }
-
-            .app-card {
-                padding: 45px;
-            }
-
-            .app-icon {
-                width: 90px;
-                height: 90px;
-                font-size: 3em;
-            }
-
-            .app-card h2 {
-                font-size: 2em;
-            }
-
-            .app-card p {
-                font-size: 1.2em;
-            }
+            body { padding: 40px; }
+            header { padding: 50px; }
+            .logo-emoji { width: 120px; height: 120px; font-size: 4.5em; }
+            .header-text h1 { font-size: 3.5em; }
+            .header-text p { font-size: 1.5em; }
+            .apps-grid { grid-template-columns: repeat(3, 1fr); gap: 40px; }
+            .app-card { padding: 45px; }
+            .app-icon { width: 90px; height: 90px; font-size: 3em; }
+            .app-card h2 { font-size: 2em; }
+            .app-card p { font-size: 1.2em; }
         }
 
-        /* Tablets */
         @media (max-width: 768px) {
-            .apps-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 20px;
-            }
-
-            header {
-                flex-direction: column;
-                text-align: center;
-                padding: 25px;
-            }
-
-            .header-text h1 {
-                font-size: 2em;
-            }
-
-            .header-text p {
-                font-size: 1em;
-            }
+            .apps-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+            header { flex-direction: column; text-align: center; padding: 25px; }
+            .header-text h1 { font-size: 2em; }
+            .header-text p { font-size: 1em; }
         }
 
-        /* Móviles */
         @media (max-width: 480px) {
-            body {
-                padding: 15px;
-            }
-
-            .apps-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .logo-emoji {
-                width: 60px;
-                height: 60px;
-                font-size: 2em;
-            }
-
-            .header-text h1 {
-                font-size: 1.6em;
-            }
-
-            .header-text p {
-                font-size: 0.9em;
-            }
-
-            .app-card {
-                padding: 25px;
-            }
+            body { padding: 15px; }
+            .apps-grid { grid-template-columns: 1fr; }
+            .logo-emoji { width: 60px; height: 60px; font-size: 2em; }
+            .header-text h1 { font-size: 1.6em; }
+            .header-text p { font-size: 0.9em; }
+            .app-card { padding: 25px; }
         }
 
-        /* Animación de carga */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .app-card {
@@ -297,6 +226,7 @@
         .app-card:nth-child(3) { animation-delay: 0.3s; }
         .app-card:nth-child(4) { animation-delay: 0.4s; }
         .app-card:nth-child(5) { animation-delay: 0.5s; }
+        .app-card:nth-child(6) { animation-delay: 0.6s; }
     </style>
 </head>
 <body>
@@ -347,10 +277,25 @@
                 <span class="app-badge">Ciencias</span>
             </a>
 
+            <a href="https://vunisal706-droid.github.io/superlector/" class="app-card" target="_blank">
+                <div class="app-icon icon-yellow">📚</div>
+                <h2>Superlector</h2>
+                <p>Herramienta de lectura especialmente diseñada para infantil y primer ciclo de primaria con actividades adaptadas.</p>
+                <span class="app-badge">Lengua</span>
+            </a>
+
             <a href="https://vunisal706-droid.github.io/Resoluciondeproblemas/" class="app-card" target="_blank">
                 <div class="app-icon icon-yellow">💡</div>
                 <h2>Resolución de Problemas</h2>
                 <p>Desarrolla estrategias y técnicas para resolver problemas matemáticos de forma estructurada y efectiva.</p>
+                <span class="app-badge">Matemáticas</span>
+            </a>
+
+            <!-- NUEVO JUEGO -->
+            <a href="https://vunisal706-droid.github.io/division/" class="app-card" target="_blank">
+                <div class="app-icon icon-egipto">➗</div>
+                <h2>Quest de Divisiones en Egipto</h2>
+                <p>Acompaña a Capitulín en una aventura por el antiguo Egipto resolviendo divisiones y superando desafíos matemáticos.</p>
                 <span class="app-badge">Matemáticas</span>
             </a>
         </div>
@@ -361,7 +306,6 @@
     </div>
 
     <script>
-        // Registrar Service Worker para PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('service-worker.js')
@@ -370,7 +314,6 @@
             });
         }
 
-        // Añadir efecto de ripple al hacer clic
         document.querySelectorAll('.app-card').forEach(card => {
             card.addEventListener('click', function(e) {
                 const ripple = document.createElement('span');
@@ -397,7 +340,6 @@
             });
         });
 
-        // Animación ripple
         const style = document.createElement('style');
         style.textContent = `
             @keyframes ripple {
