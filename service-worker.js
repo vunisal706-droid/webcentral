@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ceip-capitulaciones-v2';
+const CACHE_NAME = 'ceip-capitulaciones-v3';
 const urlsToCache = [
   './',
   './index.html',
@@ -22,7 +22,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Cache abierto');
+        console.log('✅ Cache abierto y actualizado');
         return cache.addAll(urlsToCache);
       })
   );
@@ -35,47 +35,36 @@ self.addEventListener('activate', event => {
       return Promise.all(
         cacheNames.map(cacheName => {
           if (cacheName !== CACHE_NAME) {
-            console.log('Eliminando cache antigua:', cacheName);
+            console.log('🗑️ Eliminando cache antigua:', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
     })
   );
+  console.log('🔄 Service Worker activado correctamente');
 });
 
 // Interceptar peticiones
 self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+
+  // ⚠️ No interferir con recursos de otros dominios (por ejemplo, los juegos externos)
+  if (url.origin !== self.location.origin) {
+    return; // Dejar que el navegador gestione la petición directamente
+  }
+
+  // Manejar solo los archivos del mismo dominio
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Cache hit - devolver respuesta del cache
-        if (response) {
-          return response;
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request).then(fetchResponse => {
+        // Guardar en caché las respuestas válidas
+        if (fetchResponse && fetchResponse.status === 200 && fetchResponse.type === 'basic') {
+          const responseToCache = fetchResponse.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, responseToCache));
         }
-        
-        // Clonar la petición
-        const fetchRequest = event.request.clone();
-        
-        return fetch(fetchRequest).then(response => {
-          // Comprobar si es una respuesta válida
-          if (!response || response.status !== 200 || response.type !== 'basic') {
-            return response;
-          }
-          
-          // Clonar la respuesta
-          const responseToCache = response.clone();
-          
-          caches.open(CACHE_NAME)
-            .then(cache => {
-              cache.put(event.request, responseToCache);
-            });
-          
-          return response;
-        }).catch(() => {
-          // Si falla la red, devolver página offline si existe
-          return caches.match('./index.html');
-        });
-      })
+        return fetchResponse;
+      }).catch(() => caches.match('./index.html')); // Offline fallback
+    })
   );
 });
