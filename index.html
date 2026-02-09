@@ -4,14 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portal de aplicaciones educativas del CEIP Capitulaciones">
-    <meta name="theme-color" content="#1e40af">
-    <title>Apps Educativas - CEIP Capitulaciones</title>
+    <meta name="theme-color" content="#6366f1">
+    <title>CEIP Capitulaciones - Portal Educativo</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icon-16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --accent: #f59e0b;
+            --bg-dark: #0f172a;
+            --bg-card: rgba(255, 255, 255, 0.95);
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-hover: 0 35px 60px -15px rgba(0, 0, 0, 0.35);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -19,71 +32,200 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Partículas flotantes */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 25s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 20s; width: 15px; height: 15px; }
+        .particle:nth-child(3) { left: 35%; animation-delay: 4s; animation-duration: 28s; }
+        .particle:nth-child(4) { left: 50%; animation-delay: 1s; animation-duration: 22s; width: 8px; height: 8px; }
+        .particle:nth-child(5) { left: 65%; animation-delay: 3s; animation-duration: 26s; }
+        .particle:nth-child(6) { left: 80%; animation-delay: 5s; animation-duration: 24s; width: 12px; height: 12px; }
+        .particle:nth-child(7) { left: 90%; animation-delay: 2s; animation-duration: 30s; }
+        .particle:nth-child(8) { left: 5%; animation-delay: 6s; animation-duration: 18s; width: 20px; height: 20px; }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
+        /* Header mejorado */
         header {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: var(--shadow), 0 0 0 1px rgba(255, 255, 255, 0.2);
             display: flex;
             align-items: center;
-            gap: 30px;
+            gap: 40px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(236, 72, 153, 0.2));
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            width: 100px;
+            height: 100px;
         }
 
         .logo-emoji {
-            width: 80px;
-            height: 80px;
-            border-radius: 15px;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            width: 100%;
+            height: 100%;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffb700 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3em;
-            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+            font-size: 3.5em;
+            box-shadow: 0 10px 30px rgba(255, 183, 0, 0.4), inset 0 -5px 20px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+            animation: bounce 2s ease infinite;
+            border: 4px solid rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: linear-gradient(135deg, #ffd700, #ff6b6b);
+            border-radius: 30px;
+            filter: blur(20px);
+            opacity: 0.4;
+            animation: glow 3s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes glow {
+            from { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            to { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .header-text {
+            position: relative;
+            z-index: 1;
         }
 
         .header-text h1 {
-            color: #1e40af;
-            font-size: 2.5em;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3.2em;
             font-weight: 700;
-            margin-bottom: 5px;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
         }
 
         .header-text p {
             color: #64748b;
+            font-size: 1.3em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-text p::before {
+            content: '✨';
             font-size: 1.2em;
         }
 
+        /* Grid mejorado */
         .apps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
         }
 
+        /* Tarjetas mejoradas */
         .app-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease;
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: var(--shadow), 0 0 0 1px rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             text-decoration: none;
             color: inherit;
@@ -91,6 +233,8 @@
             flex-direction: column;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
         }
 
         .app-card::before {
@@ -99,166 +243,327 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 6px;
+            background: linear-gradient(90deg, var(--card-color-1, #667eea) 0%, var(--card-color-2, #764ba2) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .app-card:hover::before {
+            opacity: 1;
         }
 
         .app-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: var(--shadow-hover), 0 0 0 1px rgba(255, 255, 255, 0.8);
+        }
+
+        .app-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .app-card:hover::after {
+            opacity: 0.5;
+        }
+
+        /* Iconos mejorados */
+        .app-icon-wrapper {
+            position: relative;
+            margin-bottom: 25px;
         }
 
         .app-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 15px;
+            width: 85px;
+            height: 85px;
+            border-radius: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            font-size: 2.8em;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15), inset 0 -3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 3px solid rgba(255, 255, 255, 0.4);
         }
 
-        .icon-red {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        .app-card:hover .app-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
-        .icon-orange {
-            background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
+        .app-icon-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110%;
+            height: 110%;
+            border-radius: 26px;
+            filter: blur(15px);
+            opacity: 0.5;
+            z-index: 1;
+            transition: all 0.3s ease;
         }
 
-        .icon-blue {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        .app-card:hover .app-icon-bg {
+            opacity: 0.8;
+            transform: translate(-50%, -50%) scale(1.2);
         }
 
-        .icon-green {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-        }
+        /* Colores específicos por categoría */
+        .icon-math { --c1: #ff6b6b; --c2: #ee5a6f; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); }
+        .icon-math .app-icon-bg { background: linear-gradient(135deg, #ff6b6b, #ee5a6f); }
 
-        .icon-purple {
-            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
-        }
+        .icon-math-2 { --c1: #ffa500; --c2: #ff8c00; background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%); }
+        .icon-math-2 .app-icon-bg { background: linear-gradient(135deg, #ffa500, #ff8c00); }
 
-        .icon-yellow {
-            background: linear-gradient(135deg, #f9d423 0%, #ff4e50 100%);
-        }
+        .icon-math-3 { --c1: #43e97b; --c2: #38f9d7; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .icon-math-3 .app-icon-bg { background: linear-gradient(135deg, #43e97b, #38f9d7); }
 
-        .icon-egipto {
-            background: linear-gradient(135deg, #d4af37 0%, #f7e98e 100%);
-            border: 2px solid #b8860b;
-        }
+        .icon-math-4 { --c1: #4facfe; --c2: #00f2fe; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .icon-math-4 .app-icon-bg { background: linear-gradient(135deg, #4facfe, #00f2fe); }
 
-        .icon-brain {
-            background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
-        }
+        .icon-lang { --c1: #a18cd1; --c2: #fbc2eb; background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
+        .icon-lang .app-icon-bg { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
 
-        .icon-robot {
-            background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
-        }
+        .icon-science { --c1: #43e97b; --c2: #38f9d7; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .icon-science .app-icon-bg { background: linear-gradient(135deg, #43e97b, #38f9d7); }
 
-        .icon-tesoro {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
+        .icon-lang-2 { --c1: #f9d423; --c2: #ff4e50; background: linear-gradient(135deg, #f9d423 0%, #ff4e50 100%); }
+        .icon-lang-2 .app-icon-bg { background: linear-gradient(135deg, #f9d423, #ff4e50); }
 
-        .icon-tildes {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-        }
+        .icon-egipto { --c1: #d4af37; --c2: #f7e98e; background: linear-gradient(135deg, #d4af37 0%, #f7e98e 100%); border: 2px solid #b8860b; }
+        .icon-egipto .app-icon-bg { background: linear-gradient(135deg, #d4af37, #f7e98e); }
+
+        .icon-culture { --c1: #4facfe; --c2: #00f2fe; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .icon-culture .app-icon-bg { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+
+        .icon-adventure { --c1: #667eea; --c2: #f093fb; background: linear-gradient(135deg, #667eea 0%, #f093fb 100%); }
+        .icon-adventure .app-icon-bg { background: linear-gradient(135deg, #667eea, #f093fb); }
+
+        .icon-logic { --c1: #ff6b6b; --c2: #ee5a6f; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); }
+        .icon-logic .app-icon-bg { background: linear-gradient(135deg, #ff6b6b, #ee5a6f); }
+
+        .icon-brain { --c1: #667eea; --c2: #f093fb; background: linear-gradient(135deg, #667eea 0%, #f093fb 100%); }
+        .icon-brain .app-icon-bg { background: linear-gradient(135deg, #667eea, #f093fb); }
+
+        .icon-robot { --c1: #00d2ff; --c2: #3a7bd5; background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%); }
+        .icon-robot .app-icon-bg { background: linear-gradient(135deg, #00d2ff, #3a7bd5); }
+
+        .icon-reading { --c1: #f093fb; --c2: #f5576c; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .icon-reading .app-icon-bg { background: linear-gradient(135deg, #f093fb, #f5576c); }
+
+        .icon-ortografia { --c1: #11998e; --c2: #38ef7d; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .icon-ortografia .app-icon-bg { background: linear-gradient(135deg, #11998e, #38ef7d); }
+
+        .icon-caballero { --c1: #e74c3c; --c2: #c0392b; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); }
+        .icon-caballero .app-icon-bg { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+
+        .icon-cavernicola { --c1: #8b4513; --c2: #d2691e; background: linear-gradient(135deg, #8b4513 0%, #d2691e 100%); }
+        .icon-cavernicola .app-icon-bg { background: linear-gradient(135deg, #8b4513, #d2691e); }
 
         .app-card h2 {
-            color: #1e293b;
-            font-size: 1.6em;
+            font-family: 'Fredoka', sans-serif;
+            color: var(--text-dark);
+            font-size: 1.7em;
             margin-bottom: 12px;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .app-card p {
-            color: #64748b;
+            color: var(--text-light);
             font-size: 1.05em;
-            line-height: 1.6;
+            line-height: 1.7;
             flex-grow: 1;
-        }
-
-        .app-badge {
-            display: inline-block;
-            background: #f1f5f9;
-            color: #475569;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            margin-top: 15px;
             font-weight: 500;
         }
 
+        .app-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: #475569;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9em;
+            margin-top: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .app-card:hover .app-badge {
+            background: linear-gradient(135deg, var(--c1, #667eea) 0%, var(--c2, #764ba2) 100%);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* Footer mejorado */
         footer {
             text-align: center;
             color: white;
-            margin-top: 40px;
-            padding: 20px;
-            font-size: 0.95em;
+            margin-top: 60px;
+            padding: 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        footer::before {
+            content: '🎮';
+            display: block;
+            font-size: 2em;
+            margin-bottom: 15px;
+            animation: bounce 2s ease infinite;
+        }
+
+        /* Animaciones de entrada */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .app-card {
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .app-card:nth-child(1) { animation-delay: 0.05s; }
+        .app-card:nth-child(2) { animation-delay: 0.1s; }
+        .app-card:nth-child(3) { animation-delay: 0.15s; }
+        .app-card:nth-child(4) { animation-delay: 0.2s; }
+        .app-card:nth-child(5) { animation-delay: 0.25s; }
+        .app-card:nth-child(6) { animation-delay: 0.3s; }
+        .app-card:nth-child(7) { animation-delay: 0.35s; }
+        .app-card:nth-child(8) { animation-delay: 0.4s; }
+        .app-card:nth-child(9) { animation-delay: 0.45s; }
+        .app-card:nth-child(10) { animation-delay: 0.5s; }
+        .app-card:nth-child(11) { animation-delay: 0.55s; }
+        .app-card:nth-child(12) { animation-delay: 0.6s; }
+        .app-card:nth-child(13) { animation-delay: 0.65s; }
+        .app-card:nth-child(14) { animation-delay: 0.7s; }
+        .app-card:nth-child(15) { animation-delay: 0.75s; }
+        .app-card:nth-child(16) { animation-delay: 0.8s; }
+        .app-card:nth-child(17) { animation-delay: 0.85s; }
+        .app-card:nth-child(18) { animation-delay: 0.9s; }
+
+        /* Responsive mejorado */
+        @media (min-width: 1400px) {
+            .apps-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
         @media (min-width: 1200px) and (orientation: landscape) {
             body { padding: 40px; }
             header { padding: 50px; }
-            .logo-emoji { width: 120px; height: 120px; font-size: 4.5em; }
-            .header-text h1 { font-size: 3.5em; }
+            .logo-wrapper { width: 120px; height: 120px; }
+            .logo-emoji { font-size: 4em; }
+            .header-text h1 { font-size: 4em; }
             .header-text p { font-size: 1.5em; }
-            .apps-grid { grid-template-columns: repeat(3, 1fr); gap: 40px; }
-            .app-card { padding: 45px; }
-            .app-icon { width: 90px; height: 90px; font-size: 3em; }
+            .apps-grid { gap: 35px; }
+            .app-card { padding: 40px; }
+            .app-icon { width: 95px; height: 95px; font-size: 3.2em; }
             .app-card h2 { font-size: 2em; }
-            .app-card p { font-size: 1.2em; }
+            .app-card p { font-size: 1.15em; }
         }
 
         @media (max-width: 768px) {
-            .apps-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-            header { flex-direction: column; text-align: center; padding: 25px; }
-            .header-text h1 { font-size: 2em; }
-            .header-text p { font-size: 1em; }
+            .apps-grid { grid-template-columns: 1fr; gap: 25px; }
+            header { flex-direction: column; text-align: center; padding: 30px; gap: 25px; }
+            .header-text h1 { font-size: 2.4em; }
+            .header-text p { font-size: 1.1em; justify-content: center; }
+            .logo-wrapper { width: 80px; height: 80px; }
+            .logo-emoji { font-size: 2.8em; }
         }
 
         @media (max-width: 480px) {
             body { padding: 15px; }
-            .apps-grid { grid-template-columns: 1fr; }
-            .logo-emoji { width: 60px; height: 60px; font-size: 2em; }
-            .header-text h1 { font-size: 1.6em; }
-            .header-text p { font-size: 0.9em; }
-            .app-card { padding: 25px; }
+            header { padding: 25px; border-radius: 20px; }
+            .header-text h1 { font-size: 2em; }
+            .app-card { padding: 25px; border-radius: 20px; }
+            .app-icon { width: 70px; height: 70px; font-size: 2.2em; }
+            .app-card h2 { font-size: 1.4em; }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Efecto de onda al hacer clic */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-effect 0.6s ease-out;
+            pointer-events: none;
         }
 
-        .app-card {
-            animation: fadeIn 0.5s ease-out;
+        @keyframes ripple-effect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
         }
 
-        .app-card:nth-child(1) { animation-delay: 0.1s; }
-        .app-card:nth-child(2) { animation-delay: 0.2s; }
-        .app-card:nth-child(3) { animation-delay: 0.3s; }
-        .app-card:nth-child(4) { animation-delay: 0.4s; }
-        .app-card:nth-child(5) { animation-delay: 0.5s; }
-        .app-card:nth-child(6) { animation-delay: 0.6s; }
-        .app-card:nth-child(7) { animation-delay: 0.7s; }
-        .app-card:nth-child(8) { animation-delay: 0.8s; }
-        .app-card:nth-child(9) { animation-delay: 0.9s; }
-        .app-card:nth-child(10) { animation-delay: 1.0s; }
-        .app-card:nth-child(11) { animation-delay: 1.1s; }
-        .app-card:nth-child(12) { animation-delay: 1.2s; }
-        .app-card:nth-child(13) { animation-delay: 1.3s; }
-        .app-card:nth-child(14) { animation-delay: 1.4s; }
-        .app-card:nth-child(15) { animation-delay: 1.5s; }
-        .app-card:nth-child(16) { animation-delay: 1.6s; }
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            border: 3px solid transparent;
+            background-clip: content-box;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
     </style>
+<base target="_blank">
 </head>
 <body>
+    <!-- Partículas flotantes -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
     <div class="container">
         <header>
             <div class="logo-container">
-                <div class="logo-emoji">👑</div>
+                <div class="logo-wrapper">
+                    <div class="logo-glow"></div>
+                    <div class="logo-emoji">👑</div>
+                </div>
             </div>
             <div class="header-text">
                 <h1>CEIP Capitulaciones</h1>
@@ -267,125 +572,194 @@
         </header>
 
         <div class="apps-grid">
-            <a href="https://vunisal706-droid.github.io/Capitulinmultiplicaciones/" class="app-card" target="_blank">
-                <div class="app-icon icon-red">✖️</div>
+            <a href="https://vunisal706-droid.github.io/Capitulinmultiplicaciones/" class="app-card" target="_blank" style="--card-color-1: #ff6b6b; --card-color-2: #ee5a6f;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-math">✖️</div>
+                </div>
                 <h2>Capitulín Multiplicaciones</h2>
                 <p>Aprende y practica las tablas de multiplicar con Capitulín en una aventura educativa divertida y motivadora.</p>
-                <span class="app-badge">Matemáticas</span>
+                <span class="app-badge">📐 Matemáticas</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/capitulinsumasyrestas/" class="app-card" target="_blank">
-                <div class="app-icon icon-orange">➕</div>
+            <a href="https://vunisal706-droid.github.io/capitulinsumasyrestas/" class="app-card" target="_blank" style="--card-color-1: #ffa500; --card-color-2: #ff8c00;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-math-2">➕</div>
+                </div>
                 <h2>Capitulín Sumas y Restas</h2>
                 <p>Domina las operaciones básicas de suma y resta mediante ejercicios interactivos y progresivos.</p>
-                <span class="app-badge">Matemáticas</span>
+                <span class="app-badge">📐 Matemáticas</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/llevadas/" class="app-card" target="_blank">
-                <div class="app-icon icon-green">🐸</div>
-                <h2>Capitulín y las Ranas - Llevadas</h2>
+            <a href="https://vunisal706-droid.github.io/llevadas/" class="app-card" target="_blank" style="--card-color-1: #43e97b; --card-color-2: #38f9d7;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-math-3">🐸</div>
+                </div>
+                <h2>Capitulín y las Ranas</h2>
                 <p>Aprende sumas y restas con llevada de forma visual y divertida. ¡La rana te ayuda a saltar con los números!</p>
-                <span class="app-badge">Matemáticas</span>
+                <span class="app-badge">📐 Matemáticas</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/matemagia/" class="app-card" target="_blank">
-                <div class="app-icon icon-blue">🔢</div>
+            <a href="https://vunisal706-droid.github.io/matemagia/" class="app-card" target="_blank" style="--card-color-1: #4facfe; --card-color-2: #00f2fe;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-math-4">🔢</div>
+                </div>
                 <h2>Matemagia</h2>
                 <p>Herramienta completa para practicar diversos conceptos matemáticos adaptados al currículo escolar.</p>
-                <span class="app-badge">Matemáticas</span>
+                <span class="app-badge">📐 Matemáticas</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/lecturapp2/" class="app-card" target="_blank">
-                <div class="app-icon icon-purple">📖</div>
+            <a href="https://vunisal706-droid.github.io/lecturapp2/" class="app-card" target="_blank" style="--card-color-1: #a18cd1; --card-color-2: #fbc2eb;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-lang">📖</div>
+                </div>
                 <h2>LecturApp</h2>
                 <p>Desarrolla habilidades de lectura comprensiva con textos interactivos y actividades adaptadas a cada nivel.</p>
-                <span class="app-badge">Lengua</span>
+                <span class="app-badge">📚 Lengua</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/animales/" class="app-card" target="_blank">
-                <div class="app-icon icon-green">🦁</div>
+            <a href="https://vunisal706-droid.github.io/animales/" class="app-card" target="_blank" style="--card-color-1: #43e97b; --card-color-2: #38f9d7;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-science">🦁</div>
+                </div>
                 <h2>Animales</h2>
                 <p>Explora el fascinante mundo animal y aprende sobre diferentes especies y sus características.</p>
-                <span class="app-badge">Ciencias</span>
+                <span class="app-badge">🔬 Ciencias</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/superlector/" class="app-card" target="_blank">
-                <div class="app-icon icon-yellow">📚</div>
+            <a href="https://vunisal706-droid.github.io/superlector/" class="app-card" target="_blank" style="--card-color-1: #f9d423; --card-color-2: #ff4e50;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-lang-2">📚</div>
+                </div>
                 <h2>Superlector Adventures</h2>
                 <p>Herramienta de lectura especialmente diseñada para infantil y primer ciclo de primaria con actividades adaptadas.</p>
-                <span class="app-badge">Lengua</span>
+                <span class="app-badge">📚 Lengua</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/Resoluciondeproblemas/" class="app-card" target="_blank">
-                <div class="app-icon icon-yellow">💡</div>
+            <a href="https://vunisal706-droid.github.io/Resoluciondeproblemas/" class="app-card" target="_blank" style="--card-color-1: #f9d423; --card-color-2: #ff4e50;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-lang-2">💡</div>
+                </div>
                 <h2>Resolución de Problemas</h2>
                 <p>Desarrolla estrategias y técnicas para resolver problemas matemáticos de forma estructurada y efectiva.</p>
-                <span class="app-badge">Matemáticas</span>
+                <span class="app-badge">📐 Matemáticas</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/division/" class="app-card" target="_blank">
-                <div class="app-icon icon-egipto">➗</div>
+            <a href="https://vunisal706-droid.github.io/division/" class="app-card" target="_blank" style="--card-color-1: #d4af37; --card-color-2: #f7e98e;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-egipto">➗</div>
+                </div>
                 <h2>Quest de Divisiones en Egipto</h2>
                 <p>Acompaña a Capitulín en una aventura por el antiguo Egipto resolviendo divisiones y superando desafíos matemáticos.</p>
-                <span class="app-badge">Matemáticas</span>
+                <span class="app-badge">📐 Matemáticas</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/trivial/" class="app-card" target="_blank">
-                <div class="app-icon icon-blue">🎯</div>
+            <a href="https://vunisal706-droid.github.io/trivial/" class="app-card" target="_blank" style="--card-color-1: #4facfe; --card-color-2: #00f2fe;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-culture">🎯</div>
+                </div>
                 <h2>Capitrivial</h2>
                 <p>Pon a prueba tus conocimientos con Capitulín en este divertido juego de preguntas sobre diferentes áreas del conocimiento.</p>
-                <span class="app-badge">Cultura General</span>
+                <span class="app-badge">🌍 Cultura General</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/misterio/" class="app-card" target="_blank">
-                <div class="app-icon icon-purple">🔍</div>
+            <a href="https://vunisal706-droid.github.io/misterio/" class="app-card" target="_blank" style="--card-color-1: #667eea; --card-color-2: #f093fb;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-adventure">🔍</div>
+                </div>
                 <h2>Misterio en el Cole</h2>
                 <p>Resuelve un emocionante misterio en el CEIP Capitulaciones. Explora, encuentra pistas y descubre qué ha ocurrido.</p>
-                <span class="app-badge">Aventura</span>
+                <span class="app-badge">🎮 Aventura</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/escaperoom/" class="app-card" target="_blank">
-                <div class="app-icon icon-red">🔐</div>
+            <a href="https://vunisal706-droid.github.io/escaperoom/" class="app-card" target="_blank" style="--card-color-1: #ff6b6b; --card-color-2: #ee5a6f;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-logic">🔐</div>
+                </div>
                 <h2>Escape Room Educativo</h2>
                 <p>Desafía tu ingenio resolviendo acertijos y enigmas para escapar. Pon a prueba tu lógica y conocimientos.</p>
-                <span class="app-badge">Lógica</span>
+                <span class="app-badge">🧩 Lógica</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/pt/" class="app-card" target="_blank">
-                <div class="app-icon icon-brain">🧠</div>
+            <a href="https://vunisal706-droid.github.io/pt/" class="app-card" target="_blank" style="--card-color-1: #667eea; --card-color-2: #f093fb;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-brain">🧠</div>
+                </div>
                 <h2>Entrenamiento Cognitivo</h2>
                 <p>Juegos diseñados para mejorar la atención, memoria de trabajo, control inhibitorio y atención selectiva en niños.</p>
-                <span class="app-badge">Atención</span>
+                <span class="app-badge">🎯 Atención</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/robotica/" class="app-card" target="_blank">
-                <div class="app-icon icon-robot">🤖</div>
+            <a href="https://vunisal706-droid.github.io/robotica/" class="app-card" target="_blank" style="--card-color-1: #00d2ff; --card-color-2: #3a7bd5;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-robot">🤖</div>
+                </div>
                 <h2>CapiRobots - Robótica</h2>
                 <p>Aprende los fundamentos de la robótica educativa con actividades interactivas y desafíos de programación.</p>
-                <span class="app-badge">Robótica</span>
+                <span class="app-badge">🤖 Robótica</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/tesoro/" class="app-card" target="_blank">
-                <div class="app-icon icon-tesoro">💎</div>
+            <a href="https://vunisal706-droid.github.io/tesoro/" class="app-card" target="_blank" style="--card-color-1: #f093fb; --card-color-2: #f5576c;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-reading">💎</div>
+                </div>
                 <h2>El Tesoro de Capitulín</h2>
                 <p>Acompaña a Capitulín en una gran aventura lectora siguiendo una progresión fonética adaptada para aprender a leer.</p>
-                <span class="app-badge">Lectura</span>
+                <span class="app-badge">📖 Lectura</span>
             </a>
 
-            <a href="https://vunisal706-droid.github.io/tildes/" class="app-card" target="_blank">
-                <div class="app-icon icon-tildes">✏️</div>
+            <a href="https://vunisal706-droid.github.io/tildes/" class="app-card" target="_blank" style="--card-color-1: #11998e; --card-color-2: #38ef7d;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-ortografia">✏️</div>
+                </div>
                 <h2>La Aventura de las Tildes</h2>
                 <p>Salta, recoge tildes y colócalas correctamente en las palabras. ¡Domina la acentuación jugando!</p>
-                <span class="app-badge">Ortografía</span>
+                <span class="app-badge">✍️ Ortografía</span>
+            </a>
+
+            <a href="https://vunisal706-droid.github.io/caballero/" class="app-card" target="_blank" style="--card-color-1: #e74c3c; --card-color-2: #c0392b;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-caballero">🛡️</div>
+                </div>
+                <h2>Caballero Multiplicaciones</h2>
+                <p>Embárcate en una aventura medieval y defiende el reino practicando las tablas de multiplicar con desafíos épicos.</p>
+                <span class="app-badge">⚔️ Matemáticas</span>
+            </a>
+
+            <a href="https://vunisal706-droid.github.io/cavernicola/" class="app-card" target="_blank" style="--card-color-1: #8b4513; --card-color-2: #d2691e;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-cavernicola">🧔‍♂️</div>
+                </div>
+                <h2>Cavernícola Sumas y Restas</h2>
+                <p>Viaja al pasado prehistórico y ayuda al cavernícola a resolver sumas y restas mientras exploras cuevas misteriosas.</p>
+                <span class="app-badge">🦴 Matemáticas</span>
             </a>
         </div>
 
         <footer>
-            <p>CEIP Capitulaciones - Santa Fe, Granada | Apps Educativas 2025</p>
+            <p>CEIP Capitulaciones - Santa Fe, Granada | Apps Educativas 2026</p>
         </footer>
     </div>
 
     <script>
+        // Registrar Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('service-worker.js')
@@ -394,6 +768,7 @@
             });
         }
 
+        // Efecto de onda al hacer clic
         document.querySelectorAll('.app-card').forEach(card => {
             card.addEventListener('click', function(e) {
                 const ripple = document.createElement('span');
@@ -401,35 +776,49 @@
                 const size = Math.max(rect.width, rect.height);
                 const x = e.clientX - rect.left - size / 2;
                 const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${x}px;
-                    top: ${y}px;
-                    background: rgba(102, 126, 234, 0.3);
-                    border-radius: 50%;
-                    transform: scale(0);
-                    animation: ripple 0.6s ease-out;
-                    pointer-events: none;
-                `;
-                
+
+                ripple.className = 'ripple';
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+
                 this.appendChild(ripple);
                 setTimeout(() => ripple.remove(), 600);
             });
         });
 
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
+        // Efecto de tilt en 3D para las tarjetas
+        document.querySelectorAll('.app-card').forEach(card => {
+            card.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+
+                this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+            });
+        });
+
+        // Animación de entrada escalonada para el header
+        window.addEventListener('load', () => {
+            document.querySelector('header').style.opacity = '0';
+            document.querySelector('header').style.transform = 'translateY(-30px)';
+            document.querySelector('header').style.transition = 'all 0.8s ease';
+
+            setTimeout(() => {
+                document.querySelector('header').style.opacity = '1';
+                document.querySelector('header').style.transform = 'translateY(0)';
+            }, 100);
+        });
     </script>
 </body>
 </html>
