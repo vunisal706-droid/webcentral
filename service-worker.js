@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ceip-capitulaciones-v3';
+const CACHE_NAME = 'ceip-capitulaciones-v4';
 const urlsToCache = [
   './',
   './index.html',
