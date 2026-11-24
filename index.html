@@ -386,6 +386,8 @@
         .icon-muevete { --c1: #22c55e; --c2: #0ea5e9; background: linear-gradient(135deg, #22c55e 0%, #0ea5e9 100%); }
         .icon-muevete .app-icon-bg { background: linear-gradient(135deg, #22c55e, #0ea5e9); }
 
+        .icon-violeta { --c1: #a855f7; --c2: #6d28d9; background: linear-gradient(135deg, #a855f7 0%, #6d28d9 100%); }
+        .icon-violeta .app-icon-bg { background: linear-gradient(135deg, #a855f7, #6d28d9); }
         .icon-halloween { --c1: #f97316; --c2: #7c3aed; background: linear-gradient(135deg, #f97316 0%, #7c3aed 100%); }
         .icon-halloween .app-icon-bg { background: linear-gradient(135deg, #f97316, #7c3aed); }
         .icon-ingles { --c1: #2563eb; --c2: #dc2626; background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%); }
@@ -594,6 +596,15 @@
         <div data-calendario-cole style="max-width:620px;margin:0 auto 18px"></div>
 
         <div class="apps-grid">
+            <a href="https://vunisal706-droid.github.io/violeta/" class="app-card" target="_blank" style="--card-color-1: #a855f7; --card-color-2: #6d28d9;">
+                <div class="app-icon-wrapper">
+                    <div class="app-icon-bg"></div>
+                    <div class="app-icon icon-violeta">💜</div>
+                </div>
+                <h2>Iguales Quest · La Aventura de la Igualdad</h2>
+                <p>Videojuego de plataformas por seis mundos con mujeres pioneras: responde preguntas, supera retos y completa el Álbum de Pioneras. Para 2.º y 3.er ciclo.</p>
+                <span class="app-badge">💜 Igualdad</span>
+            </a>
             <a href="https://vunisal706-droid.github.io/aulapt/regletas/" class="app-card" target="_blank" style="--card-color-1: #f58220; --card-color-2: #e31f26;">
                 <div class="app-icon-wrapper">
                     <div class="app-icon-bg"></div>
@@ -914,10 +925,10 @@
 <script src="/agenda/calendario.js" defer></script>
 <script>
 /* Novedades: salen una sola vez en cada dispositivo */
-(function(){var K='novedades-portal',ID='2026-11-04-regletas';try{if(localStorage.getItem(K)===ID)return;}catch(e){return;}
+(function(){var K='novedades-portal',ID='2026-11-24-iguales';try{if(localStorage.getItem(K)===ID)return;}catch(e){return;}
 function ver(){var d=document.createElement('div');d.setAttribute('role','status');
 d.style.cssText='position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:9999;width:min(420px,calc(100% - 32px));background:#fff;color:#1e293b;border-radius:18px;box-shadow:0 18px 44px rgba(15,23,42,.25);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;font-family:inherit';
-d.innerHTML='<span style="font-size:2rem;line-height:1">🌈</span><div><b style="display:block;margin-bottom:2px">Nuevo: Regletas Mágicas</b><span style="font-size:.92rem;color:#475569">Juegos con regletas y juegos OAOA. Lo tienes el primero de la lista.</span><br><button type="button" style="margin-top:10px;background:#7c3aed;color:#fff;border:0;border-radius:999px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer;min-height:40px">Entendido</button></div>';
+d.innerHTML='<span style="font-size:2rem;line-height:1">💜</span><div><b style="display:block;margin-bottom:2px">Nuevo: Iguales Quest</b><span style="font-size:.92rem;color:#475569">El videojuego de la igualdad con mujeres pioneras. Lo tienes el primero de la lista.</span><br><button type="button" style="margin-top:10px;background:#7c3aed;color:#fff;border:0;border-radius:999px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer;min-height:40px">Entendido</button></div>';
 d.querySelector('button').onclick=function(){d.remove();};document.body.appendChild(d);try{localStorage.setItem(K,ID);}catch(e){}}
 if(document.readyState==='complete')setTimeout(ver,800);else addEventListener('load',function(){setTimeout(ver,800);});})();
 </script>
